@@ -21,3 +21,11 @@ export interface MediaItem {
   alt?: string;
   transcodeTemplate?: string;
 }
+
+export interface Search {
+  locationId?: string;
+  date: string;
+  time: string;
+  partySize: number;
+  description: string;
+}

@@ -1,1 +1,49 @@
-<p>search works!</p>
+<h1>
+  Reservation Searcher
+</h1>
+
+<form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="search-field">
+    <label for="location">Location: </label>
+    <input matInput
+           id="location"
+           type="text"
+           formControlName="location"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <span>{{option}}</span>
+      </mat-option>
+     </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="search-field">
+    <label for="date">Reservation Date: </label>
+    <input matInput id="date" [matDatepicker]="picker" formControlName="date" name="datePicker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="search-field">
+    <label for="time">Reservation Time: </label>
+    <mat-select id="time" formControlName="time" multiple>
+      <mat-option *ngFor="let time of timeNames" [value]="time">{{time}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="search-field">
+    <label for="partySize">Party Size: </label>
+    <input matInput id="partySize" type="number" formControlName="partySize">
+  </mat-form-field>
+
+  <mat-form-field class="search-field">
+    <label for="description">Description: </label>
+    <input matInput id="description" type="text" formControlName="description">
+  </mat-form-field>
+
+  <button class="button" type="submit">Submit</button>
+
+</form>
+
+<router-outlet></router-outlet>
