@@ -4,6 +4,7 @@ import { Location } from "./location.model";
 import { Search } from "./location.model";
 import {HttpClient} from "@angular/common/http";
 import { DatePipe } from "@angular/common";
+import {SearchComponent} from "./search/search.component";
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,14 @@ export class ResService {
     console.log(search.description);
 
     return this.http.post(this.searchUrl, search);
+  }
+
+  getSearches(): Observable<Search[]> {
+    return this.http.get<Search[]>(this.searchUrl);
+  }
+
+  deleteSearch(id: string | undefined) {
+    console.log(this.searchUrl + "/" + id);
+    return this.http.delete(this.searchUrl + "/" + id);
   }
 }

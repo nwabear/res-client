@@ -23,6 +23,7 @@ export interface MediaItem {
 }
 
 export interface Search {
+  id?: string;
   locationId?: string;
   date: string;
   time: string;
