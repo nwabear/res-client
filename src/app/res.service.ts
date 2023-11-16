@@ -31,12 +31,6 @@ export class ResService {
       description: description
     };
 
-    console.log(search.locationId);
-    console.log(search.date);
-    console.log(search.time);
-    console.log(search.partySize);
-    console.log(search.description);
-
     return this.http.post(this.searchUrl, search);
   }
 

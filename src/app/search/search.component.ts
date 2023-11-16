@@ -3,6 +3,7 @@ import {AsyncPipe, CommonModule} from '@angular/common';
 import {ResService} from "../res.service";
 import {Location} from "../location.model";
 import {RouterOutlet} from "@angular/router";
+import {Router} from '@angular/router'
 import {
   Form,
   FormControl,
@@ -45,7 +46,7 @@ export class SearchComponent implements OnInit {
     description: ['']
   });
 
-  constructor(private resService: ResService, private formBuilder: FormBuilder) {}
+  constructor(private resService: ResService, private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.getLocations();
@@ -75,6 +76,8 @@ export class SearchComponent implements OnInit {
     // @ts-ignore
     this.resService.addSearch(locationId, this.searchForm.get('date').value, timesString, this.searchForm.get('partySize').value, this.searchForm.get('description').value)
       .subscribe(search => console.log(search));
+
+    this.router.navigate(['/alerts']);
   }
 
   private updateView(locations: Location[]) {
@@ -86,4 +89,6 @@ export class SearchComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().startsWith(filterValue));
   }
+
+  protected readonly RouterOutlet = RouterOutlet;
 }

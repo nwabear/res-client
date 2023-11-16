@@ -4,6 +4,7 @@ import {Search} from "../location.model";
 import {ResService} from "../res.service";
 import {MatTableModule} from "@angular/material/table";
 import {RouterOutlet} from "@angular/router";
+import {Router} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
@@ -18,7 +19,7 @@ export class AlertsComponent implements OnInit {
 
   displayedColumns: string[] = ['locationId', 'date', 'time', 'partySize', 'description', 'delete'];
 
-  constructor(private resService: ResService) {}
+  constructor(private resService: ResService, private router: Router) {}
 
   ngOnInit() {
     this.getAlerts();
@@ -35,6 +36,6 @@ export class AlertsComponent implements OnInit {
 
   deleteRow(row: Search) {
     this.resService.deleteSearch(row.id)
-      .subscribe();
+      .subscribe(_ => window.location.reload());
   }
 }
